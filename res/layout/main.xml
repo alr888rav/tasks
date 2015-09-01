@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/mainScreen"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:id="@+id/mainLayout">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainTitleBar"
+                android:gravity="center_vertical"
+                android:elevation="@dimen/elevation_high"
+                android:background="@color/primary_dark">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4"
+                    android:onClick="mainMenuButtonClick"
+                    android:src="@drawable/menu2"
+                    android:contentDescription="@string/app_name2"
+                    />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task_list"
+                    android:id="@+id/textView4"
+                    android:gravity="center"
+                    android:textSize="@dimen/title_text_size"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:id="@+id/taskView"
+                android:clickable="true"
+                android:divider="@drawable/divider_vert_light"
+                android:dividerHeight="1dp"
+                android:layout_weight="1.0"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/abc_action_bar_default_height_material"
+                android:background="@color/primary_dark"
+                android:id="@+id/logLayout"
+                android:gravity="center_vertical"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/logText"
+                    android:text="статус"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:id="@+id/button3"
+                    android:background="@color/accent"
+                    android:height="20dp"
+                    android:width="20dp"
+                    android:onClick="hideLogClick"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:id="@+id/mainMenu"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@drawable/divider_horiz"
+            android:clickable="false"
+            android:showDividers="middle"
+            android:focusable="false"
+            android:background="@color/primary"
+            android:visibility="visible"
+            android:layout_gravity="left|bottom"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/menuTitle"
+                android:background="@color/primary"
+                android:onClick="titleMenuClick"
+                android:gravity="center_vertical"
+                android:paddingEnd="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/app_logo" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/app_name2"
+                    android:id="@+id/textView"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/menu_background"
+                android:weightSum="100"
+                android:clickable="true"
+                android:id="@+id/setupMenu"
+                android:onClick="setupMenuClick"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:src="@drawable/settings_small"
+                    />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/setup_menu"
+                    android:id="@+id/textView2"
+                    android:gravity="left|center"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/primary_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/menu_background"
+                android:weightSum="100"
+                android:clickable="true"
+                android:id="@+id/aboutMenu"
+                android:onClick="aboutMenuClick"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/info"
+                    />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/about_app"
+                    android:id="@+id/textView3"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@color/primary_text"
+                    android:paddingStart="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:id="@+id/menuRightSide"
+        android:visibility="visible"
+        android:layout_weight="9"
+        android:alpha="0.7"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/fab_image_button"
+        android:layout_width="@dimen/fab_button_diameter"
+        android:layout_height="@dimen/fab_button_diameter"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginRight="@dimen/fab_button_margin_right"
+        android:background="@drawable/shape"
+        android:src="@drawable/fab_ic_add"
+        android:tint="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/fab_button_margin_top"
+        android:clickable="true"
+        android:onClick="addTaskButtonClick"/>
+
+</RelativeLayout>

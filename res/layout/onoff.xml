@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/white">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:gravity="center"
+            android:elevation="@dimen/elevation_high"
+            android:background="@color/primary_dark"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/on_off"
+                android:id="@+id/textView"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_do"
+                android:id="@+id/textView2"
+                android:textColor="@color/primary_text"
+                android:layout_weight="2"
+                />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/panel"
+                android:id="@+id/toggleButton"
+                android:background="@color/accent"
+                android:minHeight="@dimen/panel"
+                android:minWidth="100dp"
+                android:checked="false"
+                android:textOff="@string/off_text_short"
+                android:textOn="@string/on_text_short"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/abc_action_bar_default_height_material"
+                android:text="@string/ok"
+                android:id="@+id/onoffOkButton"
+                android:onClick="onoffOkClick"
+                android:background="@drawable/button_background"
+                android:minHeight="@dimen/panel" android:textColor="@color/white"/>
+        </LinearLayout>
+</LinearLayout>

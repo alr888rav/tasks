@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/widgetLayout"
+              android:background="@color/primary_dark"
+              android:alpha="0.9">
+
+<LinearLayout
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:divider="@drawable/divider_vert_dark"
+              android:showDividers="middle">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_column="0"
+        android:src="@drawable/apn_light"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/bluetooth_light"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:src="@drawable/wifi_light"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:src="@drawable/ring_light"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:src="@drawable/bell_light"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/configImageView"
+        android:layout_weight="1"
+        android:src="@drawable/run_light"
+        android:scaleType="fitCenter"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:showDividers="middle"
+        android:divider="@drawable/divider_vert_dark"
+        android:gravity="bottom">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobileStatus"
+            android:src="@drawable/service_on"
+            android:layout_weight="1"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bluetoothStatus"
+            android:src="@drawable/service_off"
+            android:layout_weight="1"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wifiStatus"
+            android:src="@drawable/service_on"
+            android:layout_weight="1"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ringStatus"
+            android:background="@drawable/service_off"
+            android:layout_weight="1"
+            android:text="50%"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:autoText="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notifyStatus"
+            android:background="@drawable/service_off"
+            android:layout_weight="1"
+            android:text="50%"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serviceStatus"
+            android:textSize="12sp"
+            android:background="@drawable/service_off"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</LinearLayout>

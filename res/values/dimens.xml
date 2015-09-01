@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_size">24dp</dimen>
+    <dimen name="logo_size">24dp</dimen>
+    <dimen name="title_text_size">20sp</dimen>
+    <dimen name="panel">20dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="fab_button_diameter">56dp</dimen>
+    <dimen name="fab_button_margin_top">38dp</dimen>
+    <dimen name="fab_button_margin_bottom">20dp</dimen>
+    <dimen name="fab_button_margin_right">24dp</dimen>
+    <dimen name="elevation_low">1dp</dimen>
+    <dimen name="elevation_high">8dp</dimen>
+    <dimen name="abc_action_bar_default_height_material">40dp</dimen>
+</resources>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:divider="@drawable/divider_horiz"
+    android:showDividers="middle|end"
+    android:baselineAligned="true"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:background="@color/primary_dark"
+        android:clickable="false"
+        android:elevation="@dimen/elevation_high">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="@string/shedTitle"
+            android:id="@+id/shedTitleText"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size" />
+
+        <CheckBox
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/shed_act"
+            android:id="@+id/shedActCheckBox"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:checked="false"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:clickable="true"
+        android:onClick="serviceButtonClick" android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/service_button"
+            android:id="@+id/serviceButton"
+            android:onClick="serviceButtonClick"
+            android:minWidth="150dp"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serviceTextView"
+            android:textIsSelectable="false"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:clickable="true"
+        android:onClick="timeButtonClick" android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/time_on"
+            android:id="@+id/timeOnButton"
+            android:onClick="timeButtonClick"
+            android:minWidth="150dp"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeOnText"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:clickable="true"
+        android:onClick="daysButtonClick" android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/daysButton"
+            android:onClick="daysButtonClick"
+            android:text="@string/days_button2"
+            android:minWidth="150dp"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/daysText"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:clickable="true"
+        android:onClick="onoffButtonClick" android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/on_off"
+            android:id="@+id/onOffButton"
+            android:onClick="onoffButtonClick"
+            android:minWidth="150dp"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/onOffText"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:id="@+id/volumeLayout"
+        android:clickable="true"
+        android:onClick="volumeButtonClick" android:gravity="center_vertical">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/volume"
+            android:id="@+id/volumeButton"
+            android:onClick="volumeButtonClick"
+            android:minWidth="150dp"
+            android:background="@drawable/button_background"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/volumeText"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:showDividers="middle"
+        android:divider="@drawable/divider_horiz"
+        android:gravity="bottom">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_bar_default_height_material"
+            android:text="@string/save_button"
+            android:id="@+id/saveButton"
+            android:onClick="saveButtonClick"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</LinearLayout>
