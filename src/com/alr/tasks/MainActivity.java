@@ -267,11 +267,6 @@ public class MainActivity extends Activity {
         startActivity(new Intent(MainActivity.this, AboutActivity.class));
     }
 
-    public void updateMenuClick(View v) {
-        hideMainMenu();
-        new Updater(getApplicationContext());
-    }
-
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

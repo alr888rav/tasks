@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
     private static ArrayList<PendingIntent> alarmIntent = new ArrayList<>();
   
     @Override
-    public void onReceive(Context context, Intent intent) {   
+    public void onReceive(Context context, Intent intent) {
         try {
             new Logger(context);
             Logger.d(Consts.LOG, "alarm onReceive");
@@ -53,7 +54,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             calendar.set(Calendar.HOUR_OF_DAY, ts.hour);
             calendar.set(Calendar.MINUTE, ts.minute);
             // 1 days
-            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+                alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pi);
+            else
+                alarmMgr.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
             Logger.d(Consts.LOG, "set " + ts.id + " " + ts.hour + ":" + ts.minute);
         }
         // Enable {@code SampleBootReceiver} to automatically restart the alarm when the

@@ -1,8 +1,15 @@
 package com.alr.tasks;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -10,9 +17,14 @@ import android.widget.Toast;
 import java.io.File;
 
 public class SetupActivity extends Activity {
+    private static final int REQUEST_READ_STORAGE = 111;
+    private static final int REQUEST_WRITE_STORAGE = 222;
+
+    private String pathOld;
     private String path;
     private MyDb myDb;
     private Setup setup;
+    private boolean granted;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,7 +32,8 @@ public class SetupActivity extends Activity {
         setContentView(R.layout.setting);
         setup = new Setup(getApplicationContext());
         myDb = MyDb.getInstance(getApplicationContext());
-        path = Environment.getExternalStorageDirectory().getPath() + "/backup/"+getApplicationContext().getPackageName()+"/";
+        pathOld = Environment.getExternalStorageDirectory().getPath() + "/backup/"+getApplicationContext().getPackageName()+"/";
+        path = Environment.getExternalStorageDirectory().getPath() + "/Android/data/"+getApplicationContext().getPackageName()+"/";
 
         final Messages msg = new Messages(getApplicationContext());
         final CheckBox cb = (CheckBox)findViewById(R.id.shedActiveCheckBox);
@@ -127,46 +140,103 @@ public class SetupActivity extends Activity {
     }
 
     public void backupClick(View v) {
+        if (checkWritePermission())
+            backup();
+    }
+    private void backup() {
         if (new File(path).exists()) {
-            writeBackup();
+            writeBackup(path + Consts.BASKUP_FILE);
         } else {
-            if (new File(path).mkdirs())
-                writeBackup();
-            else
+            if (new File(path).mkdirs()) {
+                writeBackup(path + Consts.BASKUP_FILE);
+                if (new File(pathOld + Consts.BASKUP_FILE).exists()) {
+                    new File(pathOld + Consts.BASKUP_FILE).delete();
+                    new File(pathOld).delete();
+                }
+            }else
                 Toast.makeText(getApplicationContext(), getString(R.string.not_saved), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void writeBackup() {
+    private void writeBackup(String file) {
         XMLio x = new XMLio(getApplicationContext(), myDb);
-        x.write(path + Consts.BASKUP_FILE);
+        x.write(file);
         Toast.makeText(getApplicationContext(), getString(R.string.saved), Toast.LENGTH_LONG).show();
     }
 
-    private void loadBackup() {
+    private void loadBackup(String file) {
         XMLio x = new XMLio(getApplicationContext(), myDb);
-        x.read(path + Consts.BASKUP_FILE);
+        x.read(file);
         MyDb.needUpdate = true;
         Messages msg = new Messages(getApplicationContext());
         msg.send(Messages.read_tasks);
         Toast.makeText(getApplicationContext(), getString(R.string.restored), Toast.LENGTH_LONG).show();
     }
+    private boolean checkReadPermission() {
+        if (ActivityCompat.checkSelfPermission(SetupActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SetupActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_STORAGE);
+            return false;
+        } else
+            return true;
+    }
+    private boolean checkWritePermission() {
+        if (ActivityCompat.checkSelfPermission(SetupActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SetupActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_STORAGE);
+            return false;
+        } else
+            return true;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_READ_STORAGE:
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(Consts.LOG, "Permission has been denied by user");
+                } else {
+                    Log.i(Consts.LOG, "Permission has been granted by user");
+                    restore();
+                }
+                break;
+            case REQUEST_WRITE_STORAGE:
+                if (grantResults.length == 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Log.i(Consts.LOG, "Permission has been denied by user");
+                } else {
+                    Log.i(Consts.LOG, "Permission has been granted by user");
+                    backup();
+                }
+                break;
 
+        }
+    }
     public void restoreClick(View v) {
+        if (checkReadPermission())
+            restore();
+    }
 
-        if (new File(path + Consts.BASKUP_FILE).exists()) {
+    private void restore() {
+        String pathB;
+        if (new File(path + Consts.BASKUP_FILE).exists())
+            pathB = path + Consts.BASKUP_FILE;
+        else if (new File(pathOld + Consts.BASKUP_FILE).exists())
+            pathB = pathOld + Consts.BASKUP_FILE;
+        else
+            pathB = "";
+
+        if (pathB.length() > 0) {
             if (myDb.getTasksCount() != 0) {
                 CallBack cbYes = new CallBack() {
                     @Override
                     public void execute() {
                         myDb.deleteAllTask();
-                        loadBackup();
+                        loadBackup(pathB);
                     }
                 };
                 CallBack cbNo = new CallBack() {
                     @Override
                     public void execute() {
-                        loadBackup();
+                        loadBackup(pathB);
                     }
                 };
                 new MyDialogs()
@@ -176,7 +246,7 @@ public class SetupActivity extends Activity {
                         .setCallBack(cbYes, cbNo, cbNo).show(SetupActivity.this);
 
             } else {
-                loadBackup();
+                loadBackup(pathB);
             }
 
         } else

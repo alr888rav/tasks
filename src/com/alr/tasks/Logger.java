@@ -57,7 +57,9 @@ public class Logger {
     }
 
     public static void db(String msg) {
+        toDB = true;
         db(msg, 1);
+        toDB = false;
     }
 
 }

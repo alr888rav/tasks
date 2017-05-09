@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyDb extends SQLiteOpenHelper {
-    public static boolean needUpdate = false;
-    public final static String TBL = "alrScheduler";
+    static boolean needUpdate = false;
+    final static String TBL = "alrScheduler";
     private final static String TBL_LOG = "alrlog";
 
     private SQLiteDatabase db;
@@ -59,7 +59,7 @@ public class MyDb extends SQLiteOpenHelper {
         }
     }
 
-    public void createTblTasks(SQLiteDatabase db) {
+    private void createTblTasks(SQLiteDatabase db) {
         String DB_QUERY = "DROP TABLE IF EXISTS " + TBL;
         db.execSQL(DB_QUERY);
 
@@ -102,13 +102,13 @@ public class MyDb extends SQLiteOpenHelper {
         db.execSQL(DB_QUERY);
     }
 
-    public int b2i(boolean b) {
+    private int b2i(boolean b) {
         if (b)
             return 1;
         else
             return 0;
     }
-    public boolean i2b(int i) {
+    private boolean i2b(int i) {
         return (i!=0);
     }
 
@@ -136,19 +136,21 @@ public class MyDb extends SQLiteOpenHelper {
         return cv;
     }
 
-    public void addLog(String msg, int flag) {
+    void addLog(String msg, int flag) {
         ContentValues cv = new ContentValues();
         cv.put("msg", msg);
         cv.put("flag", flag);
         db.insert(TBL_LOG, null, cv);
     }
 
-    public String getLastLog() {
+    String getLastLog() {
         String query = "SELECT * FROM " + TBL_LOG + " where flag=1 order by _id DESC";
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
-            return cursor.getString(cursor.getColumnIndex("msg"));
+            String last = cursor.getString(cursor.getColumnIndex("msg"));
+            cursor.close();
+            return last;
         } else
             return "";
     }
@@ -157,7 +159,7 @@ public class MyDb extends SQLiteOpenHelper {
         db.delete(TBL_LOG, null, null);
     }
 
-    public void addTask(MyTask ts) {
+    void addTask(MyTask ts) {
         ContentValues cv = taskToContent(ts);
         long rz = db.insert(TBL, null, cv);
         if (rz <= 0)
@@ -165,23 +167,23 @@ public class MyDb extends SQLiteOpenHelper {
         needUpdate = true;
     }
 
-    public void updateTask(MyTask ts) {
+    void updateTask(MyTask ts) {
         ContentValues cv = taskToContent(ts);
         db.update(TBL, cv, "_ID = ?", new String[] { String.valueOf(ts.id) });
         needUpdate = true;
     }
 
-    public void deleteTask(MyTask ts) {
+    void deleteTask(MyTask ts) {
         db.delete(TBL, "_ID = ?", new String[] { String.valueOf(ts.id) });
         needUpdate = true;
     }
 
-    public void deleteTask(int id) {
+    void deleteTask(int id) {
         db.delete(TBL, "_ID = ?", new String[] { String.valueOf(id) });
         needUpdate = true;
     }
 
-    public void deleteAllTask() {
+    void deleteAllTask() {
         db.delete(TBL, null, null);
         needUpdate = true;
     }
@@ -212,7 +214,7 @@ public class MyDb extends SQLiteOpenHelper {
         return ts;
     }
 
-    public MyTask getTask(int id) {
+    MyTask getTask(int id) {
         //Cursor cursor = db.query(TBL, new String[] { "*" }, "_ID = ? ", new String[] { Integer.toString(id)} , null, null, null);
         String query = "SELECT * FROM " + TBL + " where _id= " + Integer.toString(id);
         Cursor cursor = db.rawQuery(query, null);
@@ -220,7 +222,7 @@ public class MyDb extends SQLiteOpenHelper {
         return cursorToTask(cursor);
     }
     // for display
-    public ArrayList<Map<String, Object>> getAllTasks() {
+    ArrayList<Map<String, Object>> getAllTasks() {
         ArrayList<Map<String, Object>> tsList = new ArrayList<>();
         String query = "SELECT * FROM " + TBL + " ORDER BY hour, minute";
         Cursor cursor = db.rawQuery(query, null);
@@ -255,11 +257,12 @@ public class MyDb extends SQLiteOpenHelper {
                 dataList.add(m);
             } while(cursor.moveToNext());
         }
+        cursor.close();
         return dataList;
     }
 
     // for service
-    public ArrayList<MyTask> getAllTasksData() {
+    ArrayList<MyTask> getAllTasksData() {
         ArrayList<MyTask> tsList = new ArrayList<>();
         String query = "SELECT * FROM " + TBL;
         Cursor cursor = db.rawQuery(query, null);
@@ -273,11 +276,13 @@ public class MyDb extends SQLiteOpenHelper {
     }
 
     // for service
-    public int getTasksCount() {
+    int getTasksCount() {
         String query = "SELECT * FROM " + TBL;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()) {
-            return cursor.getCount();
+            int count = cursor.getCount();
+            cursor.close();
+            return count;
         } else
             return 0;
     }
