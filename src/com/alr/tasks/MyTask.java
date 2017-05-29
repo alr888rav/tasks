@@ -199,42 +199,54 @@ public class MyTask implements Serializable {
         final Messages msg = new Messages(context);
         try {
             if (mobile) {
-                phone.setMobileData(onOff);
                 Logger.d(Consts.LOG, "mobile " + onOff);
-                showNotify(context.getString(R.string.app_name2), context.getString(R.string.mobile_data) + " " + b2text(onOff), setup.notifySound);
-                msg.sendLog(st + " " + context.getString(R.string.mobile_data) + " " + b2text(onOff));
+                if (onOff != phone.isMobileDataEnabled()) {
+                    phone.setMobileData(onOff);
+                    showNotify(context.getString(R.string.app_name2), context.getString(R.string.mobile_data) + " " + b2text(onOff), setup.notifySound);
+                    msg.sendLog(st + " " + context.getString(R.string.mobile_data) + " " + b2text(onOff));
+                }
             }
             else if (bluetooth) {
-                phone.setBluetooth(onOff);
                 Logger.d(Consts.LOG, "bt " + onOff);
-                showNotify(context.getString(R.string.app_name2), context.getString(R.string.bluetooth) + " " + b2text(onOff), setup.notifySound);
-                msg.sendLog(st+" "+context.getString(R.string.bluetooth) + " " + b2text(onOff));
+                if (onOff != phone.isBluetoothEnabled()) {
+                    phone.setBluetooth(onOff);
+                    showNotify(context.getString(R.string.app_name2), context.getString(R.string.bluetooth) + " " + b2text(onOff), setup.notifySound);
+                    msg.sendLog(st + " " + context.getString(R.string.bluetooth) + " " + b2text(onOff));
+                }
             }
             else if (wifi) {
-                phone.setWifi(onOff);
                 Logger.d(Consts.LOG, "wifi " + onOff);
-                showNotify(context.getString(R.string.app_name2), context.getString(R.string.wifi) + " " + b2text(onOff), setup.notifySound);
-                msg.sendLog(st+" "+context.getString(R.string.wifi) + " " + b2text(onOff));
+                if (onOff != phone.isWifiEnabled()) {
+                    phone.setWifi(onOff);
+                    showNotify(context.getString(R.string.app_name2), context.getString(R.string.wifi) + " " + b2text(onOff), setup.notifySound);
+                    msg.sendLog(st + " " + context.getString(R.string.wifi) + " " + b2text(onOff));
+                }
             }
             else if (ring) {
-                max = phone.getMaxRingVolume();
-                phone.setRingVolume(Math.round((float) ring_value / 100*max), vibration);
                 Logger.d(Consts.LOG, "ring " + Integer.toString(ring_value) + "%");
-                showNotify(context.getString(R.string.app_name2), context.getString(R.string.ring_vol) + " " + Integer.toString(ring_value), setup.notifySound);
-                msg.sendLog(st+" "+context.getString(R.string.ring_vol) + " " + Integer.toString(ring_value));
+                max = phone.getMaxRingVolume();
+                int newVolume = Math.round((float) ring_value / 100*max);
+                if (phone.getRingVolume() != newVolume) {
+                    phone.setRingVolume(newVolume, vibration);
+                    showNotify(context.getString(R.string.app_name2), context.getString(R.string.ring_vol) + " " + Integer.toString(ring_value), setup.notifySound);
+                    msg.sendLog(st + " " + context.getString(R.string.ring_vol) + " " + Integer.toString(ring_value));
+                }
             }
             else if (notify) {
-                max = phone.getMaxNotifyVolume();
-                phone.setNotifyVolume(Math.round((float)ring_value/100*max), vibration);
                 Logger.d(Consts.LOG, "notify " + Integer.toString(notify_value) + "%");
-                showNotify(context.getString(R.string.app_name2), context.getString(R.string.notify_vol) + " " + Integer.toString(notify_value), setup.notifySound);
-                msg.sendLog(st+" "+context.getString(R.string.notify_vol) + " " + Integer.toString(notify_value));
+                max = phone.getMaxNotifyVolume();
+                int newVolume = Math.round((float)ring_value/100*max);
+                if (phone.getNotifyVolume() != newVolume) {
+                    phone.setNotifyVolume(newVolume, vibration);
+                    showNotify(context.getString(R.string.app_name2), context.getString(R.string.notify_vol) + " " + Integer.toString(notify_value), setup.notifySound);
+                    msg.sendLog(st + " " + context.getString(R.string.notify_vol) + " " + Integer.toString(notify_value));
+                }
             } else {
                 Logger.d(Consts.LOG, "unknown service");
             }
             result = MyTask.Result.OK;
         } catch (Exception e) {
-            Logger.e(Consts.LOG, "exectast: "+e.getMessage());
+            Logger.e(Consts.LOG, "exec task: "+e.getMessage());
             result = MyTask.Result.ERROR;
         }
     }

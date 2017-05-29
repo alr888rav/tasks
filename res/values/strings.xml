@@ -16,7 +16,7 @@
     <string name="cancel">Отмена</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
-    <string name="info_icon">infoicon</string>
+    <string name="info_icon" translatable="false">infoicon</string>
     <string name="setup_menu">Настройки</string>
     <string name="about_app">О приложении</string>
     <string name="task_list">Список задач</string>
@@ -35,9 +35,9 @@
     <string name="confirm_task_stop">Запретить задачу?</string>
     <string name="confirm_task_delete">Удалить задачу?</string>
     <string name="services">Сервисы</string>
-    <string name="mobile_data">Edge/3G данные</string>
+    <string name="mobile_data">Мобильные данные</string>
     <string name="bluetooth">Блютус</string>
-    <string name="wifi">Wi-Fi</string>
+    <string name="wifi" translatable="false">Wi-Fi</string>
     <string name="brightness">Яркость</string>
     <string name="ring">Звонок</string>
     <string name="ring_vol">Громкость звонка</string>
@@ -76,8 +76,8 @@
     <string name="vibro_setup">Вкл вибро при громкости 0</string>
     <string name="help_text">Вкл/выкл передачу данных, bluetooth, wifi,
         управление громкостью звонка и уведомлений</string>
-    <string name="copyright">ALR.RAV (c)</string>
-    <string name="copyright_year">2014-2015</string>
+    <string name="copyright" translatable="false">ALR.RAV (c)</string>
+    <string name="copyright_year" translatable="false">2014-2017</string>
     <string name="notify_sound_vibro">Звук и вибрация при уведомлении</string>
     <string name="show_icon">Показывать иконку</string>
     <string name="license">Лицензия</string>

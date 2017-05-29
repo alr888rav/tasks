@@ -1,10 +1,15 @@
 package com.alr.tasks;
 
+import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
+
+import java.util.Calendar;
 
 public class IconService extends Service{
     private Context context;
@@ -27,6 +32,7 @@ public class IconService extends Service{
         }
         return START_STICKY;
     }
+
 
     public IBinder onBind(Intent intent) {
         return null;

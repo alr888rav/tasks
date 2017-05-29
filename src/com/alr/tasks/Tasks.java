@@ -1,12 +1,13 @@
 package com.alr.tasks;
 
 import android.content.Context;
+import android.os.Build;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Tasks {
+class Tasks {
 
     private static int day = -1;
     private static int month = -1;
@@ -28,11 +29,11 @@ public class Tasks {
         MyDb.needUpdate = false;
     }
 
-    public void update() {
+    private void update() {
         readTasks();
     }
 
-    public int getDayOfWeek() {
+    private int getDayOfWeek() {
         Calendar c = Calendar.getInstance();
         int dow = c.get(Calendar.DAY_OF_WEEK);
         if (dow == Calendar.SUNDAY)
@@ -50,7 +51,7 @@ public class Tasks {
         return null;
     }
 
-    public void someTask(final Time t, final int taskId) {
+    void someTask(final Time t, final int taskId) {
         new Thread(new Runnable() {
             public void run() {
                 String dt = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -103,8 +104,12 @@ public class Tasks {
                             break;
                     }
                     Logger.d(Consts.LOG, "id=" + ts.id + " dayok=" + dayOk + " h=" + ts.hour + " m=" + ts.minute + " act=" + ts.active + " res=" + ts.result);
-                    if (dayOk && ts.active && ts.result != MyTask.Result.OK && ts.hour == t.hour && t.minute >= ts.minute && t.minute <= ts.minute+5) {
-                        ts.execTask();
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                        if (dayOk && ts.active && ts.result != MyTask.Result.OK && ts.hour == t.hour && t.minute >= ts.minute && t.minute <= ts.minute+5)
+                            ts.execTask();
+                    } else {
+                        if (dayOk && ts.active && ts.hour == t.hour && t.minute >= ts.minute && t.minute <= ts.minute+5)
+                            ts.execTask();
                     }
                 }
                 //}

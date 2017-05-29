@@ -16,7 +16,6 @@
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="info_icon">infoicon</string>
     <string name="setup_menu">Options</string>
     <string name="about_app">About</string>
     <string name="task_list">Task list</string>
@@ -35,9 +34,8 @@
     <string name="confirm_task_stop">Disable task?</string>
     <string name="confirm_task_delete">Delete task?</string>
     <string name="services">Services</string>
-    <string name="mobile_data">Edge/3G data</string>
+    <string name="mobile_data">Mobile data</string>
     <string name="bluetooth">Bluetooth</string>
-    <string name="wifi">Wi-Fi</string>
     <string name="brightness">Brightness</string>
     <string name="ring">Ring</string>
     <string name="ring_vol">Ring volume</string>
@@ -71,8 +69,6 @@
     <string name="vibro_setup">Virbations by ring volume 0</string>
     <string name="help_text">On/off mobile data, bluetooth, wifi,
         volume ring and notify</string>
-    <string name="copyright">ALR.RAV (c)</string>
-    <string name="copyright_year">2014-2015</string>
     <string name="notify_sound_vibro">Notifications sound and vibrations </string>
     <string name="show_icon">Show icon</string>
     <string name="license">License</string>
@@ -98,7 +94,7 @@
     <string name="not_saved">Not saved</string>
     <string name="show_status_bar">Show status bar</string>
     <string name="confirm_task_run">Run task now?</string>
-    <string name="time_now">Сейчас</string>
+    <string name="time_now">Now</string>
     <string name="refresh_log">Refresh</string>
     <string name="clear_log">Clear</string>
     <string name="update">Update</string>
